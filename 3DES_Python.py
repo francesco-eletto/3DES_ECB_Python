@@ -289,28 +289,43 @@ def tdes_encrypt(plain_text, key):
 if __name__ == '__main__':
 
     fin_path = ""
-
-    mode_choice = input("encrypt(0) || decrypt(1): ")
-    if mode_choice == "0":
-        fin_path = input("path of input file(plain text): ")
-    elif mode_choice == "1":
-        fin_path = input("path of input file(hexadecimal): ")
-    else:
-        print("Error - choice doesn't exists!")
-        exit()
-
-
     fout_path = OUT_PATH
     input_text = ""
     plain_key = ""
 
+    mode_choice = input("encrypt(0) || decrypt(1): ")
+    in_choice = input("in-line input(0) || file-input(1): ")
 
-    try:
-        fin = open(fin_path, mode="r")
-        input_text = fin.read()
-    except:
-        print("Error - input file doesn't exists!")
+    if in_choice == "0":
+
+        if mode_choice == "0":
+            input_text = input("insert your input(plain text): ")
+        elif mode_choice == "1":
+            input_text = input("insert your input(hexadecimal): ")
+        else:
+            print("Error - choice doesn't exists!")
+            exit()
+
+    elif in_choice == "1":
+        if mode_choice == "0":
+            fin_path = input("path of input file(plain text): ")
+        elif mode_choice == "1":
+            fin_path = input("path of input file(hexadecimal): ")
+        else:
+            print("Error - choice doesn't exists!")
+            exit()
+
+        try:
+            fin = open(fin_path, mode="r")
+            input_text = fin.read()
+        except:
+            print("Error - input file doesn't exists!")
+            exit()
+
+    else:
+        print("Error - choice doesn't exists!")
         exit()
+
 
     k_choice = input("in-line key(0) || file-key(1): ")
 
